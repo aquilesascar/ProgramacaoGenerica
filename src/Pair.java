@@ -1,26 +1,28 @@
-public class Pair<T, U> {
+public class Pair<T extends Comparable<T>, U extends Comparable<U>> implements Comparable<Pair<T, U>> {
     private T first;
     private U second;
 
-    public Pair() {
-        first = null;
-        second = null;
-        }
+    public Pair(T first, U second) {
+        this.first = first;
+        this.second = second;
+    }
 
     public T getFirst() {
-            return first;
-        }
+        return first;
+    }
 
     public U getSecond() {
-            return second;
-        }
+        return second;
+    }
 
-    public void setFirst(T newValue) {
-            first = newValue;
+    @Override
+    public int compareTo(Pair<T, U> other) {
+        // Compara com base no primeiro elemento
+        int result = this.first.compareTo(other.getFirst());
+        // Se forem iguais, compara com base no segundo elemento
+        if (result == 0) {
+            result = this.second.compareTo(other.getSecond());
         }
-
-    public void setSecond(U newValue) {
-            second = newValue;
-        }
+        return result;
+    }
 }
-
